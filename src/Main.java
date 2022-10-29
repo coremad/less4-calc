@@ -1,17 +1,17 @@
 import java.util.List;
 import java.util.regex.*;
 import java.util.Arrays;
-import java.util.Scanner;
 
 class Main {
 
     private static final List<String> rNumbs = Arrays.asList("error", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X");
-    private static int rome2num(String rNum) { // 1 to 10
+
+    static int rome2num(String rNum) { // 1 to 10
         return rNumbs.indexOf(rNum);
     }
 
-    private static String num2rome(int num) { // 1 to 399
-        if (num <= 0) throw new NullPointerException("Invalid Rome Number Result");
+    static String num2rome(int num) { // 1 to 399
+        if (num <= 0) throw new NullPointerException("Invalid Rome Number Result!");
         StringBuilder res = new StringBuilder();
         while (num >= 100) {
             res.append("C"); num -= 100;
@@ -39,12 +39,12 @@ class Main {
         };
     }
 
-    private static final Pattern patternA = Pattern.compile("^([1-9]|10)\\s*([*+-/])\\s*([1-9]|10)$");
-    private static final Pattern patternR = Pattern.compile("^(X|IX|IV|V?I{0,3})\\s*([*+-/])\\s*(X|IX|IV|V?I{0,3})$");
+    private static final Pattern patternA = Pattern.compile("^([1-9]|10)\\s*([*+-/])\\s*([1-9]|10)$"),
+                                patternR = Pattern.compile("^(X|IX|IV|V?I{0,3})\\s*([*+-/])\\s*(X|IX|IV|V?I{0,3})$");
 
     public static String calc (String input) {
-        Matcher matcherA = patternA.matcher(input);
-        Matcher matcherR = patternR.matcher(input);
+        Matcher matcherA = patternA.matcher(input),
+                matcherR = patternR.matcher(input);
         if (matcherA.find()) {
             return Integer.toString(calcExpr(
                         Integer.parseInt(matcherA.group(1)),
@@ -57,23 +57,6 @@ class Main {
                         rome2num(matcherR.group(3)),
                         matcherR.group(2)
                     ));
-        } else {
-            throw new NullPointerException("Invalid Expression");
-        }
-    }
-
-    public static void main(String[] args) { //for testing
-        for (int i =1;i<=100;i++)
-            System.out.println(i + "\t" +
-                    (i <= 10 ? rome2num(num2rome(i)) : "-") +
-                    "\t"  + num2rome(i)
-            );
-        Scanner myInput = new Scanner( System.in );
-        while (true) {
-            System.out.println("Enter Expression:");
-            String expr = myInput.nextLine().toUpperCase();
-            if (expr.isEmpty()) return;
-            System.out.println("Result: " + calc(expr));
-        }
+        } else throw new NullPointerException("Invalid Expression!");
     }
 }
