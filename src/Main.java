@@ -51,14 +51,12 @@ class Main {
                         Integer.parseInt(matcherA.group(3)),
                         matcherA.group(2)
                     ));
-        } else if (matcherR.find()) {
-            if(!matcherR.group(1).isEmpty() && !matcherR.group(1).isEmpty())
-                return num2rome(calcExpr(
-                            rome2num(matcherR.group(1)),
-                            rome2num(matcherR.group(3)),
-                            matcherR.group(2)
-                        ));
-        }
+        } else if (matcherR.find() && !matcherR.group(1).isEmpty() && !matcherR.group(1).isEmpty())
+            return num2rome(calcExpr(
+                        rome2num(matcherR.group(1)),
+                        rome2num(matcherR.group(3)),
+                        matcherR.group(2)
+                    ));
         throw new NullPointerException("Invalid Expression!");
     }
 }
