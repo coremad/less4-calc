@@ -52,11 +52,13 @@ class Main {
                         matcherA.group(2)
                     ));
         } else if (matcherR.find()) {
-            return num2rome(calcExpr(
-                        rome2num(matcherR.group(1)),
-                        rome2num(matcherR.group(3)),
-                        matcherR.group(2)
-                    ));
-        } else throw new NullPointerException("Invalid Expression!");
+            if(!matcherR.group(1).isEmpty() && !matcherR.group(1).isEmpty())
+                return num2rome(calcExpr(
+                            rome2num(matcherR.group(1)),
+                            rome2num(matcherR.group(3)),
+                            matcherR.group(2)
+                        ));
+        }
+        throw new NullPointerException("Invalid Expression!");
     }
 }
